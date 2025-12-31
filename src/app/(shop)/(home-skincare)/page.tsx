@@ -1,7 +1,7 @@
-import FeatureSection1 from '@/components/sections/feature-section-1'
+import { Divider } from '@/components/divider'
 import FeatureSection2 from '@/components/sections/feature-section-2'
-import FeatureSection5 from '@/components/sections/feature-section-5'
-import HeroSection2 from '@/components/sections/hero-section-2'
+import FeatureSection3 from '@/components/sections/feature-section-3'
+import HeroSection3 from '@/components/sections/hero-section-3'
 import SectionCollectionCarousel from '@/components/sections/section-collection-carousel'
 import SectionProductCarousel from '@/components/sections/section-product-carousel'
 import { getCollections, getGroupCollections } from '@/data'
@@ -9,47 +9,28 @@ import clsx from 'clsx'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Skincare',
+  title: 'Fashion',
   description:
-    'Discover the latest trends in skincare and beauty with our curated collection of products, tips, and more.',
+    'Discover the latest trends in fashion and style with our curated collection of clothing, accessories, and more.',
 }
 
 export default async function Home() {
-  let collections = await getCollections('skincare')
-  let groupCollections = await getGroupCollections('skincare')
+  let collections = await getCollections('fashion')
+  let groupCollections = await getGroupCollections('fashion')
 
   return (
     <div>
-      <HeroSection2 />
+      <HeroSection3 />
 
       <SectionCollectionCarousel className="container mt-20 sm:mt-28 lg:mt-28" groupCollections={groupCollections} />
-
-      <FeatureSection1
-        className="container mt-24 sm:mt-28 lg:mt-40"
-        image1={{
-          src: '/images/skincare/feature-1.webp',
-          width: 325,
-          height: 335,
-          alt: 'feature-1-1',
-        }}
-        image2={{
-          src: '/images/skincare/feature-6.webp',
-          width: 495,
-          height: 530,
-          alt: 'feature-1-2',
-        }}
-        heading={`Clean, Beyond Reproach <span data-slot="italic">Skincare.</span>`}
-      />
-
-      <FeatureSection5 className="mt-24 sm:mt-28 lg:mt-40" />
 
       {collections
         ?.filter((_, i) => i < 3)
         .map((collection, index) => (
           <SectionProductCarousel
-            key={collection.handle}
+            key={index}
             className={clsx('container', index === 0 ? 'mt-44' : 'mt-36')}
-            products={collection.products}
+            products={collection?.products}
             collectionTitle={collection?.title}
             collectionHandle={collection?.handle}
             collectionDescription={collection?.description}
@@ -59,7 +40,7 @@ export default async function Home() {
       <FeatureSection2
         className="container mt-20 sm:mt-28 lg:mt-32"
         variant="up"
-        heading={`Clean, Conscious, Performance <span data-slot="italic">Skincare.</span>`}
+        heading={`Culture Is <span data-slot="italic">More</span> Than a Set <span data-slot="italic">Of</span> Documents`}
         faqs={[
           {
             question: 'Radical Transparency',
@@ -83,10 +64,39 @@ export default async function Home() {
           },
         ]}
         image={{
-          src: '/images/skincare/feature-3.png',
-          width: 662,
+          src: '/images/fashion/feature-1.png',
+          width: 644,
           height: 653,
-          alt: 'skincare-feature-3',
+          alt: 'fashion-feature-1',
+        }}
+      />
+
+      <div className="container mt-24 sm:mt-28 lg:mt-40">
+        <Divider />
+      </div>
+
+      <FeatureSection3
+        className="mt-20 sm:mt-28 lg:mt-32"
+        heading={`Explore our exclusive designs, blending luxury with <span data-slot="italic">timeless elegance.</span>`}
+        collection1={{
+          title: 'NYC collection <br /><span data-slot="italic">edition.</span>',
+          desciption: 'Discover our exclusive collection of printed modal scarves, designed to elevate your style',
+          images: [
+            '/images/fashion/newyork.jpg',
+            '/images/fashion/newyork-1.jpg',
+            '/images/fashion/newyork-2.jpg',
+            '/images/fashion/newyork-3.jpg',
+          ],
+        }}
+        collection2={{
+          title: 'The artist´s <br /> <span data-slot="italic">wardrobe.</span>',
+          desciption: 'Discover our exclusive collection of printed modal scarves, designed to elevate your style',
+          images: [
+            '/images/fashion/NewYork-3.png',
+            '/images/fashion/p1-1.jpg',
+            '/images/fashion/p2-1.jpg',
+            '/images/fashion/p3-1.jpg',
+          ],
         }}
       />
     </div>
